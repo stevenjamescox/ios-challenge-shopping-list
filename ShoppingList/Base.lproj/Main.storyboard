@@ -36,6 +36,9 @@
                                                 <constraint firstAttribute="width" secondItem="lXS-jh-46Y" secondAttribute="height" multiplier="1:1" id="wWu-J3-boM"/>
                                             </constraints>
                                             <state key="normal" image="incomplete"/>
+                                            <connections>
+                                                <action selector="completeButtonTapped:" destination="7hM-8z-3ra" eventType="touchUpInside" id="WMv-x5-vV4"/>
+                                            </connections>
                                         </button>
                                     </subviews>
                                     <constraints>
@@ -45,6 +48,10 @@
                                         <constraint firstItem="lXS-jh-46Y" firstAttribute="centerY" secondItem="Qcv-xd-EbV" secondAttribute="centerY" id="knI-Qi-Q3z"/>
                                     </constraints>
                                 </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="completeButton" destination="lXS-jh-46Y" id="Kuu-fk-biw"/>
+                                    <outlet property="itemLabel" destination="NOg-Fr-6Q4" id="ryg-fb-Vkb"/>
+                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>
