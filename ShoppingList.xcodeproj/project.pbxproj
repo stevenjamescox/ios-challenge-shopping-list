@@ -14,6 +14,9 @@
 		95AF1CED1CF89C9400B76FB0 /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 95AF1CEB1CF89C9400B76FB0 /* Model.xcdatamodeld */; };
 		95AF1CF01CF89CEB00B76FB0 /* Item+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95AF1CEE1CF89CEB00B76FB0 /* Item+CoreDataProperties.swift */; };
 		95AF1CF11CF89CEB00B76FB0 /* Item.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95AF1CEF1CF89CEB00B76FB0 /* Item.swift */; };
+		95AF1CF41CF89FBA00B76FB0 /* Stack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95AF1CF31CF89FBA00B76FB0 /* Stack.swift */; };
+		95AF1CF61CF8A0C000B76FB0 /* ItemController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95AF1CF51CF8A0C000B76FB0 /* ItemController.swift */; };
+		95AF1CF91CF8A10500B76FB0 /* ButtonTableViewCellController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95AF1CF81CF8A10500B76FB0 /* ButtonTableViewCellController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +29,9 @@
 		95AF1CEC1CF89C9400B76FB0 /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
 		95AF1CEE1CF89CEB00B76FB0 /* Item+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Item+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		95AF1CEF1CF89CEB00B76FB0 /* Item.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Item.swift; sourceTree = "<group>"; };
+		95AF1CF31CF89FBA00B76FB0 /* Stack.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Stack.swift; path = ../Stack.swift; sourceTree = "<group>"; };
+		95AF1CF51CF8A0C000B76FB0 /* ItemController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ItemController.swift; sourceTree = "<group>"; };
+		95AF1CF81CF8A10500B76FB0 /* ButtonTableViewCellController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ButtonTableViewCellController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -61,8 +67,10 @@
 				1A4A231C1CCA8D2C003A4350 /* AppDelegate.swift */,
 				1A4A23231CCA8D2C003A4350 /* Assets.xcassets */,
 				1A4A23281CCA8D2C003A4350 /* Info.plist */,
+				95AF1CF31CF89FBA00B76FB0 /* Stack.swift */,
 				95AF1CEA1CF89C6E00B76FB0 /* Views */,
 				95AF1CE91CF89C6300B76FB0 /* View Controllers */,
+				95AF1CF71CF8A0C300B76FB0 /* Model Controllers */,
 				95AF1CF21CF89CF000B76FB0 /* Models */,
 			);
 			path = ShoppingList;
@@ -71,6 +79,7 @@
 		95AF1CE91CF89C6300B76FB0 /* View Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				95AF1CF81CF8A10500B76FB0 /* ButtonTableViewCellController.swift */,
 				95AF1CE71CF89C5F00B76FB0 /* ItemTableViewController.swift */,
 			);
 			name = "View Controllers";
@@ -88,11 +97,20 @@
 		95AF1CF21CF89CF000B76FB0 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				95AF1CEB1CF89C9400B76FB0 /* Model.xcdatamodeld */,
-				95AF1CEE1CF89CEB00B76FB0 /* Item+CoreDataProperties.swift */,
 				95AF1CEF1CF89CEB00B76FB0 /* Item.swift */,
+				95AF1CEE1CF89CEB00B76FB0 /* Item+CoreDataProperties.swift */,
+				95AF1CEB1CF89C9400B76FB0 /* Model.xcdatamodeld */,
 			);
 			name = Models;
+			path = ..;
+			sourceTree = "<group>";
+		};
+		95AF1CF71CF8A0C300B76FB0 /* Model Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				95AF1CF51CF8A0C000B76FB0 /* ItemController.swift */,
+			);
+			name = "Model Controllers";
 			path = ..;
 			sourceTree = "<group>";
 		};
@@ -166,10 +184,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				95AF1CF61CF8A0C000B76FB0 /* ItemController.swift in Sources */,
+				95AF1CF91CF8A10500B76FB0 /* ButtonTableViewCellController.swift in Sources */,
 				95AF1CF11CF89CEB00B76FB0 /* Item.swift in Sources */,
 				95AF1CE81CF89C5F00B76FB0 /* ItemTableViewController.swift in Sources */,
 				1A4A231D1CCA8D2C003A4350 /* AppDelegate.swift in Sources */,
 				95AF1CF01CF89CEB00B76FB0 /* Item+CoreDataProperties.swift in Sources */,
+				95AF1CF41CF89FBA00B76FB0 /* Stack.swift in Sources */,
 				95AF1CED1CF89C9400B76FB0 /* Model.xcdatamodeld in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
