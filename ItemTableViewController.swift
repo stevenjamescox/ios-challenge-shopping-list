@@ -102,7 +102,6 @@ class ItemTableViewController: UITableViewController, ButtonTableViewCellControl
         } else {
             ItemController.sharedController.addItem(name)
         }
-        
     }
     
     func updateWithItem(item: Item) {
@@ -132,6 +131,26 @@ class ItemTableViewController: UITableViewController, ButtonTableViewCellControl
         case .Update:
             guard let indexPath = indexPath else { return }
             tableView.reloadRowsAtIndexPaths([indexPath], withRowAnimation: .Automatic)
+        }
+    }
+    
+    
+    func controller(controller: NSFetchedResultsController, didChangeSection sectionInfo: NSFetchedResultsSectionInfo, atIndex sectionIndex: Int, forChangeType type: NSFetchedResultsChangeType) {
+        
+        switch type {
+            
+        case .Insert:
+            tableView.insertSections(NSIndexSet(index: sectionIndex), withRowAnimation: .Automatic)
+            
+        case .Delete:
+            tableView.deleteSections(NSIndexSet(index: sectionIndex), withRowAnimation: .Automatic)
+            
+        case .Move:
+            break
+            
+        case .Update:
+            break
+            
         }
     }
     
