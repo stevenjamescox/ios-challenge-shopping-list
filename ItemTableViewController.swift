@@ -52,6 +52,17 @@ class ItemTableViewController: UITableViewController, ButtonTableViewCellControl
         }
     }
     
+    override func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        guard let sections = ItemController.sharedController.fetchedResultsController.sections, index = Int(sections[section].name) else {
+            return nil
+        }
+        if index == 0 {
+            return "Need"
+        } else {
+            return "Already Got"
+        }
+    }
+    
     func addItemAlert() {
         
         let alertController = UIAlertController(title:"add to Shopping List", message: "what do you need from the store?", preferredStyle: .Alert)
