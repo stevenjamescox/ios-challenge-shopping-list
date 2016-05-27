@@ -28,11 +28,24 @@ class ItemController {
     func addItem(name: String){
         let _ = Item(name: name)
         saveToPersistentStorage()
-    
     }
 
-
-
-
-
+    func removeItem(item: Item){
+        item.managedObjectContext?.deleteObject(item)
+        saveToPersistentStorage()
+    }
+    
+    func updateItem(item: Item, name: String){
+        item.name = name
+        saveToPersistentStorage()
+    }
+    
+    func isCompleteToggled(item: Item){
+        item.isComplete = item.isComplete.boolValue
+        saveToPersistentStorage()
+    }
+    
 }
+
+
+
