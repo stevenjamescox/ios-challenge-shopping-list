@@ -54,7 +54,7 @@ class ItemController {
     }
     
     func isCompleteToggled(item: Item){
-        item.isComplete = item.isComplete.boolValue
+        item.isComplete = !item.isComplete.boolValue
         saveToPersistentStorage()
     }
     
