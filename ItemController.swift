@@ -11,11 +11,24 @@ import CoreData
 
 class ItemController {
     
-    static let sharedControlelr = ItemController()
+    static let sharedController = ItemController()
+    
+    let fetchedResultsController: NSFetchedResultsController
     
     init() {
-        let _ = NSFetchRequest(entityName: "Item")
+        let request = NSFetchRequest(entityName: "Item")
+        let sortDescriptor = NSSortDescriptor(key:"isComplete", ascending: true)
+        
+        request.sortDescriptors = [sortDescriptor]
+        
+        self.fetchedResultsController = NSFetchedResultsController(fetchRequest: request, managedObjectContext: Stack.sharedStack.managedObjectContext, sectionNameKeyPath: "isComplete", cacheName: nil)
+        do {
+            try fetchedResultsController.performFetch()
+        } catch {
+            print("Error Performing Data Fetch")
+        }
     }
+
     
     func saveToPersistentStorage() {
         do {
