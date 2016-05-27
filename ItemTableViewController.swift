@@ -76,6 +76,7 @@ class ItemTableViewController: UITableViewController, ButtonTableViewCellControl
                 return
             }
             ItemController.sharedController.addItem(name)
+            // I probably need to add something here-ish that disables adding blank/empty strings to list
         }
         
         let cancelAction = UIAlertAction(title: "Nevermind", style: .Default, handler: nil)
