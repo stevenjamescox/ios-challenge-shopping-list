@@ -20,6 +20,5 @@ class Item: NSManagedObject {
         
         self.isComplete = false
         self.name = name
-        
     }
 }

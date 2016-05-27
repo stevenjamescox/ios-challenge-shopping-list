@@ -81,7 +81,6 @@ class ItemTableViewController: UITableViewController, ButtonTableViewCellControl
         alertController.addAction(cancelAction)
         
         self.presentViewController(alertController, animated: true, completion: nil)
-        
     }
     
     @IBAction func addButtonTapped(sender: AnyObject) {
