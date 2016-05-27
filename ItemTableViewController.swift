@@ -37,7 +37,6 @@ class ItemTableViewController: UITableViewController, ButtonTableViewCellControl
             let item = ItemController.sharedController.fetchedResultsController.objectAtIndexPath(indexPath) as? Item else {
                 return ButtonTableViewCellController()
         }
-        
         cell.updateWithItem(item)
         cell.delegate = self
         return cell
@@ -122,9 +121,11 @@ class ItemTableViewController: UITableViewController, ButtonTableViewCellControl
             guard let indexPath = indexPath else { return }
             tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Automatic)
             
-        case .Move:
-            guard let indexPath = indexPath, newIndexPath = newIndexPath else { return }
-            tableView.moveRowAtIndexPath(indexPath, toIndexPath: newIndexPath)
+        case.Move:
+            guard let indexPath = indexPath,
+                newIndexPath = newIndexPath else {return}
+            tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
+            tableView.insertRowsAtIndexPaths([newIndexPath], withRowAnimation: .Automatic)
             
         case .Update:
             guard let indexPath = indexPath else { return }
@@ -132,30 +133,23 @@ class ItemTableViewController: UITableViewController, ButtonTableViewCellControl
         }
     }
     
-    
     func controller(controller: NSFetchedResultsController, didChangeSection sectionInfo: NSFetchedResultsSectionInfo, atIndex sectionIndex: Int, forChangeType type: NSFetchedResultsChangeType) {
         
         switch type {
-            
         case .Insert:
             tableView.insertSections(NSIndexSet(index: sectionIndex), withRowAnimation: .Automatic)
-            
         case .Delete:
-            tableView.deleteSections(NSIndexSet(index: sectionIndex), withRowAnimation: .Automatic)
-            
+            tableView.deleteSections(NSIndexSet(index: sectionIndex), withRowAnimation: .Fade)
         case .Move:
             break
-            
         case .Update:
             break
-            
         }
     }
     
     func controllerDidChangeContent(controller: NSFetchedResultsController) {
         tableView.endUpdates()
     }
-    
     
     func buttonCellButtonTapped(sender: ButtonTableViewCellController) {
         guard let indexPath = tableView.indexPathForCell(sender),

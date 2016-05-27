@@ -12,9 +12,14 @@ class ButtonTableViewCellController: UITableViewCell {
     
     var delegate: ButtonTableViewCellControllerDelegate?
     
+
     @IBOutlet weak var itemLabel: UILabel!
     
     @IBOutlet weak var completeButton: UIButton!
+    
+    override func awakeFromNib() {
+        super.awakeFromNib()
+    }
     
     override func setSelected(selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
