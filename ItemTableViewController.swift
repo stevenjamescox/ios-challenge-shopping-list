@@ -18,16 +18,14 @@ class ItemTableViewController: UITableViewController, ButtonTableViewCellControl
         ItemController.sharedController.fetchedResultsController.delegate = self
         super.viewDidLoad()
     }
-    
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-    }
-    
+
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+        
         return ItemController.sharedController.fetchedResultsController.sections?.count ?? 0
     }
     
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        
         guard let sections = ItemController.sharedController.fetchedResultsController.sections else {
             return 0
         }
@@ -76,7 +74,6 @@ class ItemTableViewController: UITableViewController, ButtonTableViewCellControl
                 return
             }
             ItemController.sharedController.addItem(name)
-            // I probably need to add something here-ish that disables adding blank/empty strings to list
         }
         
         let cancelAction = UIAlertAction(title: "Nevermind", style: .Default, handler: nil)
