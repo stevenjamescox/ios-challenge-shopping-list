@@ -8,3 +8,31 @@
 
 import Foundation
 import CoreData
+
+class ItemController {
+    
+    static let sharedControlelr = ItemController()
+    
+    init() {
+        let _ = NSFetchRequest(entityName: "Item")
+    }
+    
+    func saveToPersistentStorage() {
+        do {
+            try Stack.sharedStack.managedObjectContext.save()
+        } catch {
+            print("Error Saving Data")
+        }
+    }
+    
+    func addItem(name: String){
+        let _ = Item(name: name)
+        saveToPersistentStorage()
+    
+    }
+
+
+
+
+
+}
