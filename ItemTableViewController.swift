@@ -7,58 +7,132 @@
 //
 
 import UIKit
+import CoreData
 
-class ItemTableViewController: UITableViewController, ButtonTableViewCellControllerDelegate {
-
-    
+class ItemTableViewController: UITableViewController, ButtonTableViewCellControllerDelegate, NSFetchedResultsControllerDelegate
+{
     var item: Item?
     
-    
     override func viewDidLoad() {
+        self.title = "Shopping List"
+        ItemController.sharedController.fetchedResultsController.delegate = self
         super.viewDidLoad()
     }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
-
-
+    
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        return 1
+        return ItemController.sharedController.fetchedResultsController.sections?.count ?? 0
     }
-
+    
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
         guard let sections = ItemController.sharedController.fetchedResultsController.sections else {
             return 0
         }
         return sections[section].numberOfObjects
     }
-
+    
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("itemCell", forIndexPath: indexPath)
-
+        guard let cell = tableView.dequeueReusableCellWithIdentifier("itemCell", forIndexPath: indexPath) as? ButtonTableViewCellController,
+            let item = ItemController.sharedController.fetchedResultsController.objectAtIndexPath(indexPath) as? Item else {
+                return ButtonTableViewCellController()
+        }
+        
+        cell.updateWithItem(item)
+        cell.delegate = self
         return cell
     }
- 
+    
     override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
         if editingStyle == .Delete {
-            // Delete the row from the data source
-            tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
-    }
+            guard let item = ItemController.sharedController.fetchedResultsController.objectAtIndexPath(indexPath) as? Item else { return }
+            ItemController.sharedController.removeItem(item)
+        }
     }
     
-    
+    func addItemAlert() {
+        
+        let alertController = UIAlertController(title:"add to Shopping List", message: "what do you need from the store?", preferredStyle: .Alert)
+        
+        alertController.addTextFieldWithConfigurationHandler {(alertTextField) in alertTextField.placeholder = "enter item"
+            self.alertTextField = alertTextField
+        }
+        
+        let addItemAction = UIAlertAction(title: "Add to List", style: .Default) { (_) in
+            guard let name = self.alertTextField.text else {
+                return
+            }
+            ItemController.sharedController.addItem(name)
+        }
+        
+        let cancelAction = UIAlertAction(title: "Nevermind", style: .Default, handler: nil)
+        
+        alertController.addAction(addItemAction)
+        alertController.addAction(cancelAction)
+        
+        self.presentViewController(alertController, animated: true, completion: nil)
+        
+    }
     
     @IBAction func addButtonTapped(sender: AnyObject) {
+        addItemAlert()
     }
-    
     
     @IBOutlet var alertTextField: UITextField!
     
+    func updateItem() {
+        guard let name = alertTextField.text else {
+            return
+        }
+        if let item = self.item {
+            ItemController.sharedController.updateItem(item, name : name)
+        } else {
+            ItemController.sharedController.addItem(name)
+        }
+        
+    }
+    
+    func updateWithItem(item: Item) {
+        self.item = item
+        alertTextField.text = item.name
+    }
+    
+    func controllerWillChangeContent(controller: NSFetchedResultsController) {
+        tableView.beginUpdates()
+    }
+    
+    func controller(controller: NSFetchedResultsController, didChangeObject anyObject: AnyObject, atIndexPath indexPath: NSIndexPath?, forChangeType type: NSFetchedResultsChangeType, newIndexPath: NSIndexPath?) {
+        
+        switch type {
+        case .Insert:
+            guard let newIndexPath = newIndexPath else { return }
+            tableView.insertRowsAtIndexPaths([newIndexPath], withRowAnimation: .Automatic)
+            
+        case .Delete:
+            guard let indexPath = indexPath else { return }
+            tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Automatic)
+            
+        case .Move:
+            guard let indexPath = indexPath, newIndexPath = newIndexPath else { return }
+            tableView.moveRowAtIndexPath(indexPath, toIndexPath: newIndexPath)
+            
+        case .Update:
+            guard let indexPath = indexPath else { return }
+            tableView.reloadRowsAtIndexPaths([indexPath], withRowAnimation: .Automatic)
+        }
+    }
+    
+    func controllerDidChangeContent(controller: NSFetchedResultsController) {
+        tableView.endUpdates()
+    }
     
     
-    
-    
+    func buttonCellButtonTapped(sender: ButtonTableViewCellController) {
+        guard let indexPath = tableView.indexPathForCell(sender),
+            item = ItemController.sharedController.fetchedResultsController.objectAtIndexPath(indexPath) as? Item else {return}
+        ItemController.sharedController.isCompleteToggled(item)
+    }
     
 }

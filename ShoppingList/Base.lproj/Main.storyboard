@@ -71,7 +71,7 @@
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="AoS-rd-wnz" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="enter item" textAlignment="natural" minimumFontSize="17" id="a6y-jj-0e7" userLabel="Alert Text Field">
+                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" id="a6y-jj-0e7" userLabel="Alert Text Field">
                     <rect key="frame" x="0.0" y="0.0" width="97" height="30"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
